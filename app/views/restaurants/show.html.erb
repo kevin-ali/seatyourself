@@ -2,8 +2,39 @@
 
 
 
-<p><%= @restaurant[:address] %><p>
-<p><%= @restaurant[:neighbourhood] %></p>
-<p><%= @restaurant[:price] %></p>
-<p><%= @restaurant[:cuisine] %></p>
-<p><%= @restaurant[:summary] %></p>
+<%= @restaurant[:address] %><br>
+<%= @restaurant[:neighbourhood] %><br>
+<%= @restaurant[:price] %><br>
+<%= @restaurant[:cuisine] %><br>
+<%= @restaurant[:summary] %><br>
+
+
+<h4>Make Reservation</h4>
+
+  <%= form_for([@restaurant, @reservation]) do |f| %>
+    <% if @reservation.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@reservation.errors.count, "error") %> prohibited this reservation from being saved:</h2>
+
+        <ul>
+        <% @reservation.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :party_size %><br />
+      <%= f.number_field :party_size %>
+    </div>
+    <div class="field">
+      <%= f.date_select :date %><br />
+  	  <%= f.time_select :time, :ignore_date => true %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+

@@ -1,2 +1,9 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<h1>User Profile</h1>
+<h2>Current Reservations:</h2>
+
+<br>
+
+ <% @user.reservations.each do |r| %>
+ 	<%= r.restaurant.name %> | Seats: <%= r.party_size %> | <%= r.date %> | <%= r.time %> <br>
+ <% end %>
+
