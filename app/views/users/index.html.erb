@@ -4,6 +4,10 @@
 <br>
 
  <% @user.reservations.each do |r| %>
- 	<%= r.restaurant.name %> | Seats: <%= r.party_size %> | <%= r.date %> | <%= r.time %> <br>
+ 	<%= r.restaurant.name %><br> 
+ 	Seats: <%= r.party_size %><br> 
+ 	<%= r.date %> | <%= r.time.strftime("%H:%M") %> <br>
+ 	<%= link_to "Cancel Reservation", r, :confirm => "Are you sure you want to cancel this reservation?", :method => :delete %>
+ 	<hr width="33%" align="left"> <br>
  <% end %>
 

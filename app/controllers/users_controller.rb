@@ -19,6 +19,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @reservation = Reservation.find(params[:id])
+    @reservation.destroy
+    redirect_to restaurants_path
+  end
+
   private
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation, :name)

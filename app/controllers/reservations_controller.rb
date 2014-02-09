@@ -1,5 +1,8 @@
 class ReservationsController < ApplicationController
-  before_filter :load_restaurant
+ 	
+before_filter :load_restaurant 
+
+
 
   def show
     @reservation = Reservation.find(params[:id])
@@ -28,7 +31,9 @@ class ReservationsController < ApplicationController
   def destroy
     @reservation = Reservation.find(params[:id])
     @reservation.destroy
+    redirect_to users_path
   end
+
 
   private
   def reservation_params
@@ -36,7 +41,7 @@ class ReservationsController < ApplicationController
   end
 
   def load_restaurant
-    @restaurant = Restaurant.find(params[:restaurant_id])
+    @restaurant = Restaurant.find(params[:restaurant_id]) if params[:restaurant_id] != nil
   end
 
 
