@@ -12,6 +12,9 @@ before_filter :load_restaurant
     @reservation = @restaurant.reservations.build(reservation_params)
     @reservation.user_id = current_user.id
 
+    if @reservation.time.strftime("%H").to_i <= 20 && @reservation.time.strftime("%H").to_i >= 11 
+    
+
     @reservations = Reservation.all
     total_seats = @reservation.party_size
 
@@ -39,6 +42,13 @@ before_filter :load_restaurant
     else
       render :action => :show, notice: 'Not enough seats'
     end
+
+  else
+
+    redirect_to restaurants_path, :notice => 'Not open!'
+
+  end
+
   end
 
   def destroy
