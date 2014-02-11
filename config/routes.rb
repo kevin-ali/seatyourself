@@ -10,6 +10,7 @@ Seatyourself::Application.routes.draw do
   
   resources :sessions, :only => [:new, :create, :destroy]
   
+  get 'restaurants/sort/:cuisine' => 'restaurants#sort', as: :sort_restaurants
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

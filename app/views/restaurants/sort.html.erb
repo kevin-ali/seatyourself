@@ -1,0 +1,12 @@
+
+
+<h1>Sorted Restaurants</h1>
+
+<p><%= link_to "Home", restaurants_path %> | <%= link_to "Existing Reservations", users_path %></p>
+
+
+<ul>
+  <% @restaurants.each do |restaurant| %>
+    <li><%= link_to restaurant.name, restaurant_path(restaurant) %></li>
+  <% end %>
+</ul>

@@ -33,6 +33,12 @@ class RestaurantsController < ApplicationController
     end
   end
 
+  def sort
+    # @restaurants = Restaurant.all
+    @restaurants = Restaurant.where(cuisine: params[:cuisine])
+  end
+
+
   def update
     @restaurant = Restaurant.find(params[:id])
 
