@@ -12,6 +12,19 @@ before_filter :load_restaurant
     @reservation = @restaurant.reservations.build(reservation_params)
     @reservation.user_id = current_user.id
 
+    @reservations = Reservation.all
+    total_seats = @reservation.party_size
+
+    @reservations.each { |r| if (r.time.strftime("%H:%M") == @reservation.time.strftime("%H:%M")) && (r.date == @reservation.date) && (r.restaurant_id == @reservation.restaurant_id)
+        total_seats += r.party_size    
+      end
+      }
+
+    if total_seats <= 100
+     # @restaurant.seats -= @reservation.party_size
+     # @restaurant.save
+    
+
     # Check out this article on [.build](http://stackoverflow.com/questions/783584/ruby-on-rails-how-do-i-use-the-active-record-build-method-in-a-belongs-to-rel)
     # You could use a longer alternate syntax if it makes more sense to you
     # 
@@ -21,10 +34,10 @@ before_filter :load_restaurant
     #   :user_id    => current_user.id
     # )
 
-    if @reservation.save
+      @reservation.save
       redirect_to restaurants_path, notice: 'Reservation created successfully'
     else
-      render :action => :show
+      render :action => :show, notice: 'Not enough seats'
     end
   end
 

@@ -1,3 +1,5 @@
+<p><%= link_to "Home", restaurants_path %> | <%= link_to "Existing Reservations", users_path %></p>
+
 <h1><%= @restaurant[:name] %></h1>
 
 
@@ -30,7 +32,7 @@
     </div><br>
     <div class="field">
       <%= f.date_select :date %><br />
-  	  <%= f.time_select :time, :ignore_date => true %>
+  	  <%= f.time_select :time, :ignore_date => true, :ampm => true, :minute_step => 60, :default => {:hour => '11'} %>
     </div><br>
 
     <div class="actions">
